@@ -5,7 +5,7 @@ import { phones, whatsapp } from "../data/content"
 
 const interests = ["Lab test", "Health profile", "Home collection", "General enquiry"]
 
-export default function BookingForm({ compact = false }) {
+export default function BookingForm({ compact = false, className = "" }) {
   const [params] = useSearchParams()
   const [sent, setSent] = useState(null)
 
@@ -31,7 +31,7 @@ export default function BookingForm({ compact = false }) {
       `Hello SSV Group, I would like to enquire.\nName: ${sent.name}\nPhone: ${sent.phone}\nNeed: ${sent.interest}\nItem: ${sent.item || "-"}\nHome collection: ${sent.home ? "Yes" : "No"}\nAddress: ${sent.address || "-"}\nNote: ${sent.message || "-"}`,
     )
     return (
-      <div className="card p-6 sm:p-8">
+      <div className={`card p-6 sm:p-8 ${className}`}>
         <CheckCircle2 className="text-emerald-600" />
         <h3 className="mt-3 text-2xl font-extrabold">Enquiry saved on this device</h3>
         <p className="mt-2 text-muted">
@@ -51,7 +51,7 @@ export default function BookingForm({ compact = false }) {
   }
 
   return (
-    <form key={`${defaults.interest}-${defaults.item}`} onSubmit={onSubmit} className="card p-6 sm:p-8">
+    <form key={`${defaults.interest}-${defaults.item}`} onSubmit={onSubmit} className={`card p-6 sm:p-8 ${className}`}>
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-semibold">
           Your name
