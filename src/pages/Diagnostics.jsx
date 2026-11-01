@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom"
 import CenterCard from "../components/CenterCard"
 import { useEffect, useMemo, useState } from "react"
-import { categories, centers, conditions, tests } from "../data/content"
+import { categories, centers, conditions, faqs, phones, tests, whatsapp } from "../data/content"
 
 export default function Diagnostics() {
   const [params, setParams] = useSearchParams()
@@ -48,6 +48,64 @@ export default function Diagnostics() {
             </p>
           </div>
           <img src="/images/lab-hero.jpg" alt="Microscope and sample tubes in the laboratory" className="h-72 w-full rounded-[2rem] object-cover object-center" />
+        </div>
+      </section>
+
+      <section className="page-wrap pb-10">
+        <h2 className="text-3xl font-extrabold">Blood tests at the laboratory</h2>
+        <p className="mt-3 max-w-3xl text-lg leading-8 text-muted">
+          Samples are analysed for routine checks, hormones, infection screens, and health profiles. Most routine reports are shared within 24 hours. Special tests take longer, and the charge is confirmed before you book.
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["Centres", "Chinchwad, plus Rainbow, Isha, Mayraa, and Samarth in the SSV network."],
+            ["Routine reports", "Most routine blood reports are shared within 24 hours."],
+            ["Simple booking", "Call or WhatsApp the test name. We confirm the slot and the charge."],
+            ["Home collection", "Ask for a pickup. We confirm the area and the time before anyone visits."],
+          ].map(([title, text]) => (
+            <article key={title} className="card p-5">
+              <h3 className="text-lg font-extrabold">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-muted">{text}</p>
+            </article>
+          ))}
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {tests
+            .filter((test) => ["P041", "BC003", "BC269"].includes(test.code))
+            .map((test) => (
+              <article key={test.code} className="card flex flex-col p-5">
+                <p className="text-xs font-bold uppercase tracking-wider text-brand-600">{test.code}</p>
+                <h3 className="mt-2 text-xl font-extrabold">{test.name}</h3>
+                <p className="mt-2 text-sm text-muted">Sample: {test.sample}</p>
+                <Link
+                  to={`/book?item=${encodeURIComponent(`${test.name} (${test.code})`)}&interest=Lab%20test`}
+                  className="btn btn-brand mt-5"
+                >
+                  Book this test
+                </Link>
+              </article>
+            ))}
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a href={phones[0].href} className="btn btn-gold">
+            Call {phones[0].label}
+          </a>
+          <a href={`https://wa.me/${whatsapp}`} className="btn btn-ghost" target="_blank" rel="noreferrer">
+            WhatsApp
+          </a>
+        </div>
+        <div className="mt-8 divide-y divide-brand-100 rounded-3xl border border-brand-100 bg-white">
+          {faqs.map((faq) => (
+            <details key={faq.q} className="group px-5 py-4">
+              <summary className="cursor-pointer list-none font-extrabold marker:content-none">
+                <span className="flex items-center justify-between gap-4">
+                  {faq.q}
+                  <span className="text-brand-600 group-open:rotate-45">+</span>
+                </span>
+              </summary>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">{faq.a}</p>
+            </details>
+          ))}
         </div>
       </section>
 

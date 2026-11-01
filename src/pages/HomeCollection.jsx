@@ -38,7 +38,7 @@ export default function HomeCollection() {
             </div>
           </div>
           <div className="space-y-4">
-          <img src="/images/collection.jpg" alt="Technician collecting a blood sample" className="h-64 w-full rounded-[2rem] object-cover" />
+          <img src="/images/home-visit.jpg" alt="Home blood sample collection" className="h-auto w-full rounded-[2rem] object-contain" />
           <article className="card p-6">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Call the lab</p>
             <h2 className="mt-2 text-3xl font-extrabold">Three numbers, one desk</h2>
