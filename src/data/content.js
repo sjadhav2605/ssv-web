@@ -131,6 +131,36 @@ export const centers = [
     detail: "Part of the SSV diagnostic network.",
     map: "https://maps.app.goo.gl/TRMh1UCxjFBD6Dks8",
   },
+  {
+    name: "Yogi Diagnostic Center",
+    image: "/centers/yogi.jpg",
+    detail: "Surat | Vadodara",
+    map: "https://www.google.com/maps/search/?api=1&query=Yogi+Diagnostic+Center+Surat",
+  },
+  {
+    name: "Shree Swami Vivekanand",
+    image: "/centers/vivekanand.jpg",
+    detail: "Pimpri | Chinchwad",
+    map: "https://www.google.com/maps/search/?api=1&query=Shree+Swami+Vivekanand+Diagnostic+Pimpri",
+  },
+  {
+    name: "Starlight Diagnostic Center",
+    image: "/centers/starlight.jpg",
+    detail: "Nashik | Dhule",
+    map: "https://www.google.com/maps/search/?api=1&query=Starlight+Diagnostic+Center+Nashik",
+  },
+  {
+    name: "Care360 Diagnostic Center",
+    image: "/centers/care360.jpg",
+    detail: "Nagpur | Wardha | Chandrapur | Amravati | Akola",
+    map: "https://www.google.com/maps/search/?api=1&query=Care360+Diagnostic+Center+Nagpur",
+  },
+  {
+    name: "Swarajya Diagnostic Center",
+    image: "/centers/swarajya.jpg",
+    detail: "Jadgao | Pachora | Muktainagar | Bhusawal",
+    map: "https://www.google.com/maps/search/?api=1&query=Swarajya+Diagnostic+Center+Pachora",
+  },
 ]
 
 export const reviews = [

@@ -19,8 +19,8 @@ export default function HomeCollection() {
   return (
     <>
       <section>
-        <div className="page-wrap grid items-center gap-8 py-14 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
+        <div className="page-wrap grid items-start gap-8 py-14 lg:grid-cols-2">
+          <div className="lg:pt-6">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Home sample collection</p>
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-brand-950 sm:text-5xl">
               Give the sample at home. Skip the waiting room.
@@ -37,34 +37,40 @@ export default function HomeCollection() {
               </Link>
             </div>
           </div>
-          <div className="space-y-4">
-          <img src="/images/home-visit.jpg" alt="Home blood sample collection" className="h-auto w-full object-contain" />
-          <article className="card p-6">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Call the lab</p>
-            <h2 className="mt-2 text-3xl font-extrabold">Three numbers, one desk</h2>
-            <ul className="mt-4 space-y-2">
-              {phones.map((phone) => (
-                <li key={phone.href}>
-                  <a className="text-lg font-extrabold text-brand-800" href={phone.href}>
-                    {phone.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 text-sm font-bold text-muted">Home visit technician · {homeVisit.name}</p>
-            <a className="mt-1 inline-block text-lg font-extrabold text-brand-800" href={homeVisit.href}>
-              {homeVisit.phone}
-            </a>
+          <article className="grid overflow-hidden border border-slate-300 bg-[#fbfaf6] sm:grid-cols-[220px_1fr]">
+            <img
+              src="/images/home-visit.jpg"
+              alt="A phlebotomist collecting a blood sample at home"
+              className="h-72 w-full object-cover object-[center_42%] sm:h-full"
+            />
+            <div className="flex flex-col justify-center border-t border-slate-300 px-5 py-5 sm:border-t-0 sm:border-l">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Call the lab</p>
+              <h2 className="mt-2 text-2xl font-extrabold text-brand-950">Three numbers, one desk</h2>
+              <ul className="mt-4 space-y-1">
+                {phones.map((phone) => (
+                  <li key={phone.href}>
+                    <a className="text-lg font-extrabold text-brand-800" href={phone.href}>
+                      {phone.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-4 border-t border-slate-200 pt-4">
+                <p className="text-sm font-bold text-muted">Home visit technician · {homeVisit.name}</p>
+                <a className="mt-1 inline-block text-lg font-extrabold text-brand-800" href={homeVisit.href}>
+                  {homeVisit.phone}
+                </a>
+              </div>
+            </div>
           </article>
-          </div>
         </div>
       </section>
 
-      <section className="page-wrap grid gap-4 py-12 md:grid-cols-4">
+      <section className="page-wrap grid gap-4 pb-14 md:grid-cols-4">
         {steps.map((step, index) => (
-          <article key={step.title} className="card p-5">
+          <article key={step.title} className="card flex h-full flex-col border-slate-300 p-5">
             <p className="text-sm font-extrabold text-brand-800">0{index + 1}</p>
-            <h2 className="mt-4 font-extrabold">{step.title}</h2>
+            <h2 className="mt-3 font-extrabold">{step.title}</h2>
             <p className="mt-2 text-sm leading-6 text-muted">{step.text}</p>
           </article>
         ))}
@@ -79,7 +85,7 @@ export default function HomeCollection() {
               <Link
                 key={test.code}
                 to={`/book?interest=Home%20collection&item=${encodeURIComponent(`${test.name} (${test.code})`)}`}
-                className="card p-4"
+                className="card border-slate-300 p-4"
               >
                 <p className="font-extrabold">{test.name}</p>
                 <p className="mt-1 text-sm text-muted">{test.category} · {test.code}</p>
