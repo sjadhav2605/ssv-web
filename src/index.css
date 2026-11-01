@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-50: #f6f3ff;
+  --color-brand-100: #ece6ff;
+  --color-brand-200: #d8ccff;
+  --color-brand-600: #6d28d9;
+  --color-brand-700: #5b21b6;
+  --color-brand-800: #4c1d95;
+  --color-brand-900: #3b1578;
+  --color-brand-950: #240b4d;
+  --color-gold: #f5b400;
+  --color-ink: #161221;
+  --color-muted: #5e5872;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: #fff;
+}
+
+::selection {
+  background: #ddd6fe;
+  color: #240b4d;
+}
+
+@layer components {
+  .page-wrap {
+    width: min(1180px, calc(100% - 2rem));
+    margin-inline: auto;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1;
+    transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid #5b21b6;
+    outline-offset: 3px;
+  }
+
+  .btn-gold {
+    background: var(--color-gold);
+    color: var(--color-brand-950);
+    box-shadow: 0 10px 24px -16px #b8860b;
+  }
+
+  .btn-gold:hover {
+    background: #ffc62b;
+  }
+
+  .btn-brand {
+    background: var(--color-brand-800);
+    color: white;
+    box-shadow: 0 12px 28px -16px #4c1d95;
+  }
+
+  .btn-brand:hover {
+    background: var(--color-brand-700);
+  }
+
+  .btn-ghost {
+    background: white;
+    color: var(--color-brand-800);
+    border: 1px solid #e4def4;
+  }
+
+  .btn-ghost:hover {
+    border-color: #c4b5fd;
+    background: var(--color-brand-50);
+  }
+
+  .card {
+    border: 1px solid #efeaf8;
+    border-radius: 1.5rem;
+    background: white;
+    box-shadow: 0 18px 40px -32px rgba(46, 16, 101, 0.55);
+  }
+
+  .field {
+    width: 100%;
+    border-radius: 0.9rem;
+    border: 1px solid #e6e0f2;
+    background: #fff;
+    padding: 0.85rem 0.95rem;
+    font-size: 0.95rem;
+    color: var(--color-ink);
+    outline: none;
+  }
+
+  .field:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+  }
+}
