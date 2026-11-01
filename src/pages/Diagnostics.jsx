@@ -36,7 +36,7 @@ export default function Diagnostics() {
 
   return (
     <>
-      <section className="bg-[linear-gradient(180deg,#f6f3ff_0%,#fff_100%)]">
+      <section>
         <div className="page-wrap grid items-center gap-8 py-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">SSV Diagnostic Pathology Laboratory</p>
@@ -47,7 +47,7 @@ export default function Diagnostics() {
               Biochemistry, haematology, hormones, infection screens, histopathology, and preventive profiles. This is a selection from the laboratory menu. If your test is missing, call and we will check it.
             </p>
           </div>
-          <img src="/images/lab-hero.jpg" alt="Microscope and sample tubes in the laboratory" className="h-72 w-full rounded-[2rem] object-cover object-center" />
+          <img src="/images/lab-hero.jpg" alt="Microscope and sample tubes in the laboratory" className="h-72 w-full object-cover object-center" />
         </div>
       </section>
 
@@ -94,7 +94,7 @@ export default function Diagnostics() {
             WhatsApp
           </a>
         </div>
-        <div className="mt-8 divide-y divide-brand-100 rounded-3xl border border-brand-100 bg-white">
+        <div className="mt-8 divide-y divide-slate-300 border border-slate-300 bg-[#fbfaf6]">
           {faqs.map((faq) => (
             <details key={faq.q} className="group px-5 py-4">
               <summary className="cursor-pointer list-none font-extrabold marker:content-none">
@@ -135,7 +135,7 @@ export default function Diagnostics() {
                 key={item}
                 type="button"
                 onClick={() => update({ category: item === "All" ? "" : item })}
-                className={`shrink-0 rounded-full px-3 py-1.5 text-sm font-bold ${
+                className={`shrink-0 px-3 py-1.5 text-sm font-bold ${
                   category === item ? "bg-brand-800 text-white" : "bg-brand-50 text-brand-800"
                 }`}
               >
@@ -144,7 +144,7 @@ export default function Diagnostics() {
             ))}
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
-            <button type="button" onClick={() => update({ condition: "" })} className={`rounded-full px-3 py-1 text-xs font-bold ${condition ? "bg-slate-100" : "bg-gold text-brand-950"}`}>
+            <button type="button" onClick={() => update({ condition: "" })} className={`px-3 py-1 text-xs font-bold ${condition ? "bg-[#e7e2d6]" : "bg-gold text-white"}`}>
               All conditions
             </button>
             {conditions.map((item) => (
@@ -152,7 +152,7 @@ export default function Diagnostics() {
                 key={item}
                 type="button"
                 onClick={() => update({ condition: item })}
-                className={`rounded-full px-3 py-1 text-xs font-bold ${condition === item ? "bg-gold text-brand-950" : "bg-slate-100 text-ink"}`}
+                className={`px-3 py-1 text-xs font-bold ${condition === item ? "bg-gold text-white" : "bg-[#e7e2d6] text-ink"}`}
               >
                 {item}
               </button>
@@ -191,7 +191,7 @@ export default function Diagnostics() {
           </div>
         )}
 
-        <div className="mt-12 grid gap-4 rounded-[2rem] bg-brand-950 p-6 text-white md:grid-cols-[1.2fr_0.8fr] md:p-8">
+        <div className="mt-12 grid gap-4 bg-brand-900 p-6 text-white md:grid-cols-[1.2fr_0.8fr] md:p-8">
           <div>
             <h2 className="text-3xl font-extrabold">Home sample collection</h2>
             <p className="mt-3 max-w-xl leading-7 text-white/75">

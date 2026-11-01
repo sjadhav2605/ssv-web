@@ -23,7 +23,7 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: var(--color-ink);
-  background: #fff;
+  background: #f3f0e8;
 }
 
 ::selection {
@@ -42,16 +42,12 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 999px;
+    border-radius: 4px;
     padding: 0.85rem 1.25rem;
     font-size: 0.95rem;
     font-weight: 700;
     line-height: 1;
-    transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
-  }
-
-  .btn:hover {
-    transform: translateY(-1px);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
   }
 
   .btn:focus-visible {
@@ -92,14 +88,13 @@ body {
 
   .card {
     border: 1px solid #e6ebf2;
-    border-radius: 1.25rem;
-    background: white;
-    box-shadow: 0 8px 24px -20px rgba(18, 42, 102, 0.45);
+    border-radius: 4px;
+    background: #fbfaf6;
   }
 
   .field {
     width: 100%;
-    border-radius: 0.8rem;
+    border-radius: 4px;
     border: 1px solid #d7deea;
     background: #fff;
     padding: 0.85rem 0.95rem;

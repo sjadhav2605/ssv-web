@@ -1,6 +1,6 @@
 export default function CenterCard({ center }) {
   return (
-    <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+    <article className="overflow-hidden border border-slate-300 bg-[#fbfaf6]">
       <div className="flex aspect-[5/2] items-center justify-center bg-white">
         <img src={center.image} alt="" className="h-full w-full object-cover" />
       </div>

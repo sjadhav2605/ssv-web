@@ -7,6 +7,8 @@ import Diagnostics from "./pages/Diagnostics"
 import Home from "./pages/Home"
 import HomeCollection from "./pages/HomeCollection"
 import NotFound from "./pages/NotFound"
+import Privacy from "./pages/Privacy"
+import Terms from "./pages/Terms"
 
 export default function App() {
   return (
@@ -19,6 +21,8 @@ export default function App() {
           <Route path="home-collection" element={<HomeCollection />} />
           <Route path="contact" element={<Contact />} />
           <Route path="book" element={<Book />} />
+          <Route path="terms" element={<Terms />} />
+          <Route path="privacy" element={<Privacy />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

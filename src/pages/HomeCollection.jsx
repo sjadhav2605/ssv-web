@@ -18,10 +18,10 @@ export default function HomeCollection() {
 
   return (
     <>
-      <section className="bg-[linear-gradient(180deg,#ecfdf5_0%,#fff_70%)]">
+      <section>
         <div className="page-wrap grid items-center gap-8 py-14 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">Home sample collection</p>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Home sample collection</p>
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-brand-950 sm:text-5xl">
               Give the sample at home. Skip the waiting room.
             </h1>
@@ -38,7 +38,7 @@ export default function HomeCollection() {
             </div>
           </div>
           <div className="space-y-4">
-          <img src="/images/home-visit.jpg" alt="Home blood sample collection" className="h-auto w-full rounded-[2rem] object-contain" />
+          <img src="/images/home-visit.jpg" alt="Home blood sample collection" className="h-auto w-full object-contain" />
           <article className="card p-6">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Call the lab</p>
             <h2 className="mt-2 text-3xl font-extrabold">Three numbers, one desk</h2>
@@ -63,7 +63,7 @@ export default function HomeCollection() {
       <section className="page-wrap grid gap-4 py-12 md:grid-cols-4">
         {steps.map((step, index) => (
           <article key={step.title} className="card p-5">
-            <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gold text-sm font-extrabold text-brand-950">0{index + 1}</span>
+            <p className="text-sm font-extrabold text-brand-800">0{index + 1}</p>
             <h2 className="mt-4 font-extrabold">{step.title}</h2>
             <p className="mt-2 text-sm leading-6 text-muted">{step.text}</p>
           </article>

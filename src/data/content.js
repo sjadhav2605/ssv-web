@@ -27,10 +27,10 @@ export const nav = [
 ]
 
 export const services = [
-  { title: "Lab Tests", text: "Biochemistry, haematology, hormones, and infection screens.", to: "/diagnostics", tone: "bg-blue-50 text-brand-800" },
-  { title: "Home Collection", text: "Ask for a sample pickup at home. We confirm the area, time, and charge.", to: "/home-collection", tone: "bg-green-50 text-gold" },
-  { title: "Health Profiles", text: "Fever, thyroid, diabetes, liver, kidney, and antenatal profiles.", to: "/diagnostics?category=Profiles", tone: "bg-brand-50 text-brand-800" },
-  { title: "24-hour reports", text: "Most routine reports are ready within a day. Special tests take longer.", to: "/diagnostics", tone: "bg-sky-50 text-sky-700" },
+  { title: "Lab Tests", text: "Biochemistry, haematology, hormones, and infection screens.", to: "/diagnostics" },
+  { title: "Home Collection", text: "Ask for a sample pickup at home. We confirm the area, time, and charge.", to: "/home-collection" },
+  { title: "Health Profiles", text: "Fever, thyroid, diabetes, liver, kidney, and antenatal profiles.", to: "/diagnostics?category=Profiles" },
+  { title: "24-hour reports", text: "Most routine reports are ready within a day. Special tests take longer.", to: "/diagnostics" },
 ]
 
 export const conditions = ["Diabetes", "Thyroid", "Fever", "Heart", "Liver", "Kidney", "Pregnancy", "Anemia", "Fertility"]

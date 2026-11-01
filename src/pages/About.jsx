@@ -38,7 +38,7 @@ export default function About() {
       </section>
 
       <section className="page-wrap grid items-center gap-8 pb-12 lg:grid-cols-2">
-        <img src="/images/lab.jpg" alt="Automated diagnostic analysers in the laboratory" className="h-80 w-full rounded-[2rem] object-cover" />
+        <img src="/images/lab.jpg" alt="Automated diagnostic analysers in the laboratory" className="h-80 w-full object-cover" />
         <div className="space-y-4">
           <article className="card p-6">
             <h2 className="text-2xl font-extrabold">SSV Diagnostic Pathology Laboratory</h2>

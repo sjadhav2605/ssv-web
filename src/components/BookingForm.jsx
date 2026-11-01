@@ -1,4 +1,3 @@
-import { CheckCircle2, MessageCircle } from "lucide-react"
 import { useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { phones, whatsapp } from "../data/content"
@@ -32,14 +31,12 @@ export default function BookingForm({ compact = false, className = "" }) {
     )
     return (
       <div className={`card p-6 sm:p-8 ${className}`}>
-        <CheckCircle2 className="text-emerald-600" />
-        <h3 className="mt-3 text-2xl font-extrabold">Enquiry saved on this device</h3>
+        <h3 className="text-2xl font-extrabold">Enquiry saved on this device</h3>
         <p className="mt-2 text-muted">
           The lab team confirms bookings by phone or WhatsApp. Send this message now so someone can call you back.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
           <a className="btn btn-gold" href={`https://wa.me/${whatsapp}?text=${message}`} target="_blank" rel="noreferrer">
-            <MessageCircle size={16} />
             Send on WhatsApp
           </a>
           <a className="btn btn-ghost" href={phones[0].href}>

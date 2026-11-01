@@ -1,4 +1,3 @@
-import { Menu, Phone, X } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
 import { nav, phones } from "../data/content"
@@ -12,16 +11,16 @@ export default function Navbar() {
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white">
+    <header className="sticky top-0 z-40 border-b border-slate-300 bg-[#fbfaf6]">
       <div className="page-wrap flex h-[4.25rem] items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-brand-900 xl:hidden"
+            className="px-2 text-sm font-extrabold text-brand-900 xl:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((value) => !value)}
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            {open ? "Close" : "Menu"}
           </button>
           <Link to="/" className="flex items-center gap-2.5">
             <img src="/logo.png" alt="" className="h-11 w-11 rounded-full object-contain" />
@@ -41,7 +40,7 @@ export default function Navbar() {
               to={item.to}
               end={item.to === "/"}
               className={({ isActive }) =>
-                `rounded-full px-3 py-2 text-sm font-semibold ${
+                `px-3 py-2 text-sm font-semibold ${
                   isActive ? "text-brand-800" : "text-slate-600 hover:text-brand-800"
                 }`
               }
@@ -55,9 +54,9 @@ export default function Navbar() {
           <a
             href={phones[0].href}
             aria-label={`Call ${phones[0].label}`}
-            className="grid h-10 w-10 place-items-center rounded-full bg-slate-100 text-brand-800"
+            className="px-2 text-sm font-extrabold text-brand-900"
           >
-            <Phone size={18} />
+            Call
           </a>
           <Link to="/book" className="hidden text-sm font-bold text-brand-900 sm:inline">
             Book a test
@@ -66,7 +65,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <nav className="border-t border-slate-200 bg-white xl:hidden">
+        <nav className="border-t border-slate-300 bg-[#fbfaf6] xl:hidden">
           <div className="page-wrap flex flex-col gap-1 py-3">
             {nav.map((item) => (
               <NavLink
@@ -74,7 +73,7 @@ export default function Navbar() {
                 to={item.to}
                 end={item.to === "/"}
                 className={({ isActive }) =>
-                  `rounded-xl px-3 py-3 text-sm font-semibold ${isActive ? "bg-brand-50 text-brand-800" : "text-ink"}`
+                  `px-3 py-3 text-sm font-semibold ${isActive ? "bg-brand-50 text-brand-800" : "text-ink"}`
                 }
               >
                 {item.label}

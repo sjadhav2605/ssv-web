@@ -1,4 +1,3 @@
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react"
 import { useEffect } from "react"
 import BookingForm from "../components/BookingForm"
 import { address, email, phones, whatsapp } from "../data/content"
@@ -12,7 +11,7 @@ export default function Contact() {
 
   return (
     <>
-      <section className="bg-[#f6f8fc]">
+      <section>
         <div className="page-wrap grid items-center gap-8 py-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Contact</p>
@@ -22,17 +21,15 @@ export default function Contact() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a className="btn btn-brand" href={phones[0].href}>
-                <Phone size={16} />
                 Call {phones[0].label}
               </a>
               <a className="btn btn-gold" href={`https://wa.me/${whatsapp}`} target="_blank" rel="noreferrer">
-                <MessageCircle size={16} />
                 WhatsApp
               </a>
             </div>
           </div>
 
-          <figure className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white">
+          <figure className="overflow-hidden border border-slate-300 bg-[#fbfaf6]">
             <img src="/centers/ssv.jpg" alt="SSV Pathology and Diagnostic Center" className="h-52 w-full object-contain" />
             <figcaption className="bg-[#122a66] px-5 py-4 text-white">
               <p className="font-extrabold">SSV Pathology & Diagnostic Center</p>
@@ -46,37 +43,32 @@ export default function Contact() {
       </section>
 
       <section className="page-wrap py-10">
-        <div className="grid gap-4 md:grid-cols-3">
-          <a href={`mailto:${email}`} className="card flex h-full flex-col p-5">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#eef6ec] text-[#2f8d22]">
-              <Mail size={20} />
-            </span>
-            <p className="mt-4 text-sm font-bold text-muted">Email</p>
-            <p className="mt-1 font-extrabold leading-6 break-all text-brand-950">{email}</p>
-          </a>
-          <div className="card flex h-full flex-col p-5">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#eef1ff] text-brand-800">
-              <Phone size={20} />
-            </span>
-            <p className="mt-4 text-sm font-bold text-muted">Phone</p>
-            <ul className="mt-1 space-y-1">
-              {phones.map((phone) => (
-                <li key={phone.href}>
-                  <a href={phone.href} className="font-extrabold text-brand-800">
-                    {phone.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+        <dl className="card grid md:grid-cols-3">
+          <div className="border-b border-slate-300 p-5 md:border-r md:border-b-0">
+            <dt className="text-sm font-bold text-muted">Email</dt>
+            <dd className="mt-1 font-extrabold leading-6 break-all">
+              <a href={`mailto:${email}`}>{email}</a>
+            </dd>
           </div>
-          <a href={directions} target="_blank" rel="noreferrer" className="card flex h-full flex-col p-5">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#eef1ff] text-brand-800">
-              <MapPin size={20} />
-            </span>
-            <p className="mt-4 text-sm font-bold text-muted">Address</p>
-            <p className="mt-1 font-extrabold leading-6 text-brand-950">{address.line}</p>
-          </a>
-        </div>
+          <div className="border-b border-slate-300 p-5 md:border-r md:border-b-0">
+            <dt className="text-sm font-bold text-muted">Phone</dt>
+            <dd className="mt-1 space-y-1">
+              {phones.map((phone) => (
+                <a key={phone.href} href={phone.href} className="block font-extrabold text-brand-800">
+                  {phone.label}
+                </a>
+              ))}
+            </dd>
+          </div>
+          <div className="p-5">
+            <dt className="text-sm font-bold text-muted">Address</dt>
+            <dd className="mt-1 font-extrabold leading-6">
+              <a href={directions} target="_blank" rel="noreferrer">
+                {address.line}
+              </a>
+            </dd>
+          </div>
+        </dl>
 
         <div className="mt-8 grid items-stretch gap-6 lg:grid-cols-2">
           <BookingForm className="h-full" />

@@ -1,19 +1,8 @@
-import {
-  Clock3,
-  FlaskConical,
-  Home as HomeIcon,
-  MapPin,
-  Search,
-  ShieldCheck,
-  Star,
-} from "lucide-react"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import CenterCard from "../components/CenterCard"
 import Reveal from "../components/Reveal"
 import { centers, conditions, faqs, highlights, reviews, services, steps, tests } from "../data/content"
-
-const serviceIcons = [FlaskConical, HomeIcon, ShieldCheck, Clock3]
 
 export default function Home() {
   const navigate = useNavigate()
@@ -33,14 +22,11 @@ export default function Home() {
 
   return (
     <>
-      <section className="bg-white">
+      <section>
         <div className="page-wrap py-6 sm:py-8">
-          <form onSubmit={search} className="rounded-2xl border border-slate-200 bg-[#f7f8fb] p-3 sm:p-4">
-            <p className="flex items-center gap-2 rounded-full bg-[#eef1ff] px-4 py-3 text-sm font-semibold text-brand-800">
-              <MapPin size={16} />
-              Chinchwad, Pune
-            </p>
-            <div className="mt-3 flex items-center rounded-xl border border-slate-200 bg-white px-4">
+          <form onSubmit={search} className="border border-slate-300 bg-[#fbfaf6] p-3 sm:p-4">
+            <p className="bg-[#e7e2d6] px-4 py-3 text-sm font-semibold text-brand-800">Chinchwad, Pune</p>
+            <div className="mt-3 flex items-center border border-slate-300 bg-[#fbfaf6] px-4">
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
@@ -48,8 +34,8 @@ export default function Home() {
                 placeholder="Search for lab tests"
                 aria-label="Search tests"
               />
-              <button type="submit" aria-label="Search" className="text-brand-800">
-                <Search size={20} />
+              <button type="submit" className="text-sm font-extrabold text-brand-800">
+                Search
               </button>
             </div>
           </form>
@@ -66,22 +52,13 @@ export default function Home() {
             <span className="h-px flex-1 bg-slate-200" />
           </div>
 
-          <div className="mt-5 flex gap-4 overflow-x-auto pb-2">
-            {services.map((service, index) => {
-              const Icon = serviceIcons[index]
-              return (
-                <Link
-                  key={service.title}
-                  to={service.to}
-                  className="flex w-40 shrink-0 flex-col items-center rounded-2xl border border-slate-200 bg-white px-3 py-5"
-                >
-                  <span className={`grid h-16 w-16 place-items-center rounded-xl ${service.tone}`}>
-                    <Icon size={28} />
-                  </span>
-                  <span className="mt-4 text-center text-sm font-bold text-brand-900">{service.title}</span>
-                </Link>
-              )
-            })}
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((service) => (
+              <Link key={service.title} to={service.to} className="border border-slate-300 bg-[#fbfaf6] p-4">
+                <span className="block text-sm font-extrabold text-brand-900">{service.title}</span>
+                <span className="mt-2 block text-sm leading-6 text-muted">{service.text}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -114,7 +91,7 @@ export default function Home() {
             <Link
               key={condition}
               to={`/diagnostics?condition=${encodeURIComponent(condition)}`}
-              className="shrink-0 rounded-full border border-brand-100 bg-white px-4 py-2 text-sm font-bold text-brand-800"
+              className="shrink-0 border border-slate-300 bg-[#fbfaf6] px-4 py-2 text-sm font-bold text-brand-800"
             >
               {condition}
             </Link>
@@ -134,7 +111,7 @@ export default function Home() {
               </p>
               <ul className="mt-4 grid gap-2 text-sm font-semibold sm:grid-cols-3">
                 {["NABL accredited", "24-hour reports", "Home collection"].map((item) => (
-                  <li key={item} className="rounded-2xl bg-brand-50 px-3 py-2 text-brand-800">
+                  <li key={item} className="bg-[#e7e2d6] px-3 py-2 text-brand-800">
                     {item}
                   </li>
                 ))}
@@ -170,9 +147,7 @@ export default function Home() {
         <div className="mt-6 grid gap-4 md:grid-cols-4">
           {steps.map((step, index) => (
             <article key={step.title} className="card p-5">
-              <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gold text-sm font-extrabold text-brand-950">
-                0{index + 1}
-              </span>
+              <p className="text-sm font-extrabold text-brand-800">0{index + 1}</p>
               <h3 className="mt-4 font-extrabold">{step.title}</h3>
               <p className="mt-2 text-sm leading-6 text-muted">{step.text}</p>
             </article>
@@ -180,7 +155,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-white py-12">
+      <section className="border-y border-slate-300 py-12">
         <div className="page-wrap grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             ["24 hrs", "Routine reports"],
@@ -231,12 +206,7 @@ export default function Home() {
           <div className="mt-6 grid gap-4 lg:grid-cols-3">
             {reviews.map((review) => (
               <blockquote key={review.name} className="card p-6">
-                <div className="flex gap-1 text-gold">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <Star key={index} size={16} fill="currentColor" />
-                  ))}
-                </div>
-                <p className="mt-4 leading-7 text-ink/90">“{review.text}”</p>
+                <p className="leading-7 text-ink/90">“{review.text}”</p>
                 <footer className="mt-4 text-sm font-extrabold text-brand-800">{review.name}</footer>
               </blockquote>
             ))}
@@ -246,7 +216,7 @@ export default function Home() {
 
       <section className="page-wrap py-16">
         <h2 className="text-3xl font-extrabold">Questions</h2>
-        <div className="mt-5 divide-y divide-brand-100 rounded-3xl border border-brand-100 bg-white">
+        <div className="mt-5 divide-y divide-slate-300 border border-slate-300 bg-[#fbfaf6]">
           {faqs.map((faq) => (
             <details key={faq.q} className="group px-5 py-4">
               <summary className="cursor-pointer list-none font-extrabold marker:content-none">
@@ -262,7 +232,7 @@ export default function Home() {
       </section>
 
       <section className="page-wrap pb-16">
-        <div className="overflow-hidden rounded-[2rem] bg-gradient-to-r from-brand-800 to-brand-950 px-6 py-10 text-white sm:px-10">
+        <div className="bg-brand-900 px-6 py-10 text-white sm:px-10">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div>
               <h2 className="text-3xl font-extrabold">Need a test?</h2>
@@ -274,7 +244,7 @@ export default function Home() {
               <Link to="/book" className="btn btn-gold">
                 Book now
               </Link>
-              <Link to="/contact" className="btn bg-white text-brand-900">
+              <Link to="/contact" className="btn bg-[#fbfaf6] text-brand-900">
                 Contact
               </Link>
             </div>
