@@ -12,81 +12,80 @@ export default function Navbar() {
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-40">
-      <div className="bg-brand-950 text-white">
-        <div className="page-wrap flex items-center justify-between gap-4 py-2 text-xs sm:text-sm">
-          <p className="truncate text-white/80">Chinchwad, Pune · Diagnostic pathology laboratory</p>
-          <a href={phones[0].href} className="inline-flex shrink-0 items-center gap-1.5 font-semibold text-gold">
-            <Phone size={14} />
-            {phones[0].label}
+    <header className="sticky top-0 z-40 border-b border-slate-200 bg-white">
+      <div className="page-wrap flex h-[4.25rem] items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-brand-900 xl:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+          <Link to="/" className="flex items-center gap-2.5">
+            <img src="/logo.png" alt="" className="h-11 w-11 rounded-full object-contain" />
+            <span className="leading-tight">
+              <span className="block text-[1.35rem] font-extrabold tracking-tight text-brand-900">
+                SSV<span className="text-gold">Diagnostic</span>
+              </span>
+              <span className="block text-[11px] font-medium text-slate-500">Everything about your tests</span>
+            </span>
+          </Link>
+        </div>
+
+        <nav className="hidden items-center gap-1 xl:flex">
+          {nav.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === "/"}
+              className={({ isActive }) =>
+                `rounded-full px-3 py-2 text-sm font-semibold ${
+                  isActive ? "text-brand-800" : "text-slate-600 hover:text-brand-800"
+                }`
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <a
+            href={phones[0].href}
+            aria-label={`Call ${phones[0].label}`}
+            className="grid h-10 w-10 place-items-center rounded-full bg-slate-100 text-brand-800"
+          >
+            <Phone size={18} />
           </a>
+          <Link to="/book" className="hidden text-sm font-bold text-brand-900 sm:inline">
+            Book a test
+          </Link>
         </div>
       </div>
 
-      <div className="border-b border-brand-100 bg-white/95 backdrop-blur">
-        <div className="page-wrap flex h-[4.5rem] items-center justify-between gap-4">
-          <Link to="/" className="flex items-center gap-3">
-            <img src="/logo.png" alt="SSV Group" className="h-12 w-12 rounded-full bg-white object-contain" />
-            <span className="leading-tight">
-              <span className="block text-lg font-extrabold tracking-tight text-brand-900">SSV Group</span>
-              <span className="block text-xs font-medium text-muted">Diagnostic Laboratory</span>
-            </span>
-          </Link>
-
-          <nav className="hidden items-center gap-1 xl:flex">
+      {open && (
+        <nav className="border-t border-slate-200 bg-white xl:hidden">
+          <div className="page-wrap flex flex-col gap-1 py-3">
             {nav.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 end={item.to === "/"}
                 className={({ isActive }) =>
-                  `rounded-full px-3.5 py-2 text-sm font-semibold ${
-                    isActive ? "bg-brand-50 text-brand-800" : "text-ink/80 hover:bg-brand-50 hover:text-brand-800"
-                  }`
+                  `rounded-xl px-3 py-3 text-sm font-semibold ${isActive ? "bg-brand-50 text-brand-800" : "text-ink"}`
                 }
               >
                 {item.label}
               </NavLink>
             ))}
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <Link to="/book" className="btn btn-gold hidden sm:inline-flex">
+            <Link to="/book" className="btn btn-gold mt-2">
               Book a test
             </Link>
-            <button
-              type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-100 xl:hidden"
-              aria-label={open ? "Close menu" : "Open menu"}
-              onClick={() => setOpen((value) => !value)}
-            >
-              {open ? <X size={20} /> : <Menu size={20} />}
-            </button>
           </div>
-        </div>
-
-        {open && (
-          <div className="border-t border-brand-100 bg-white xl:hidden">
-            <nav className="page-wrap flex flex-col gap-1 py-3">
-              {nav.map((item) => (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  end={item.to === "/"}
-                  className={({ isActive }) =>
-                    `rounded-2xl px-4 py-3 text-sm font-semibold ${isActive ? "bg-brand-50 text-brand-800" : "text-ink"}`
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              ))}
-              <Link to="/book" className="btn btn-gold mt-2">
-                Book a test
-              </Link>
-            </nav>
-          </div>
-        )}
-      </div>
+        </nav>
+      )}
     </header>
   )
 }

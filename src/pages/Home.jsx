@@ -1,14 +1,15 @@
 import {
-  BadgeCheck,
   Clock3,
   FlaskConical,
   Home as HomeIcon,
+  MapPin,
   Search,
   ShieldCheck,
   Star,
 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import CenterCard from "../components/CenterCard"
 import Reveal from "../components/Reveal"
 import { centers, conditions, faqs, highlights, reviews, services, steps, tests } from "../data/content"
 
@@ -32,97 +33,56 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_#efe8ff_0%,_#ffffff_42%,_#fff8e4_100%)]">
-        <div className="page-wrap grid items-center gap-10 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
-          <div>
-            <p className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-brand-700 shadow-sm">
-              <BadgeCheck size={14} />
-              ISO 9001:2015 · NABL accredited lab
+      <section className="bg-white">
+        <div className="page-wrap py-6 sm:py-8">
+          <form onSubmit={search} className="rounded-2xl border border-slate-200 bg-[#f7f8fb] p-3 sm:p-4">
+            <p className="flex items-center gap-2 rounded-full bg-[#eef1ff] px-4 py-3 text-sm font-semibold text-brand-800">
+              <MapPin size={16} />
+              Chinchwad, Pune
             </p>
-            <h1 className="mt-5 max-w-xl text-4xl font-extrabold leading-[1.05] tracking-tight text-brand-950 sm:text-6xl">
-              Accurate reports, from a lab you can call.
-            </h1>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-muted">
-              SSV Diagnostic Pathology Laboratory runs tests across Chinchwad and partner centres. Book a test, or ask for home sample collection.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link to="/book" className="btn btn-gold">
-                Book a test
-              </Link>
-              <Link to="/diagnostics" className="btn btn-ghost">
-                View tests
-              </Link>
+            <div className="mt-3 flex items-center rounded-xl border border-slate-200 bg-white px-4">
+              <input
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                className="h-12 w-full bg-transparent text-sm outline-none"
+                placeholder="Search for lab tests"
+                aria-label="Search tests"
+              />
+              <button type="submit" aria-label="Search" className="text-brand-800">
+                <Search size={20} />
+              </button>
             </div>
-            <dl className="mt-8 grid grid-cols-3 gap-3 max-w-lg">
-              {[
-                ["24 hrs", "Routine reports"],
-                ["Home", "Sample pickup"],
-                ["5", "Centre brands"],
-              ].map(([value, label]) => (
-                <div key={label} className="rounded-2xl bg-white/80 px-3 py-3 shadow-sm">
-                  <dt className="text-xl font-extrabold text-brand-800">{value}</dt>
-                  <dd className="text-xs font-medium text-muted">{label}</dd>
-                </div>
-              ))}
-            </dl>
+          </form>
+
+          <h1 className="mt-8 text-4xl font-extrabold uppercase leading-[1.05] tracking-tight text-brand-900 sm:text-5xl">
+            Explore
+            <span className="mt-1 block text-gold">our comprehensive</span>
+            <span className="mt-1 block">diagnostic services</span>
+          </h1>
+
+          <div className="mt-6 flex items-center gap-4 text-sm text-slate-500">
+            <span className="h-px flex-1 bg-slate-200" />
+            <span>(OR) Browse for diagnostic services</span>
+            <span className="h-px flex-1 bg-slate-200" />
           </div>
 
-          <div>
-            <img
-              src="/images/lab.jpg"
-              alt="Clinical laboratory with automated analysers"
-              className="h-72 w-full rounded-[2rem] object-cover shadow-[0_30px_80px_-40px_rgba(46,16,101,0.8)] sm:h-[420px]"
-            />
-            <form onSubmit={search} className="card relative z-10 mx-4 -mt-16 p-4 sm:mx-8 sm:p-5">
-              <p className="text-sm font-extrabold text-brand-900">Search tests and profiles</p>
-              <div className="mt-3 flex gap-2">
-                <div className="relative flex-1">
-                  <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
-                  <input
-                    value={query}
-                    onChange={(event) => setQuery(event.target.value)}
-                    className="field pl-9"
-                    placeholder="CBC, thyroid, HbA1c, dengue..."
-                    aria-label="Search tests"
-                  />
-                </div>
-                <button className="btn btn-brand shrink-0 px-4" type="submit">
-                  Search
-                </button>
-              </div>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {["CBC", "Thyroid", "HbA1c", "Vitamin D"].map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => navigate(`/diagnostics?q=${encodeURIComponent(item)}`)}
-                    className="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-800"
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </form>
+          <div className="mt-5 flex gap-4 overflow-x-auto pb-2">
+            {services.map((service, index) => {
+              const Icon = serviceIcons[index]
+              return (
+                <Link
+                  key={service.title}
+                  to={service.to}
+                  className="flex w-40 shrink-0 flex-col items-center rounded-2xl border border-slate-200 bg-white px-3 py-5"
+                >
+                  <span className={`grid h-16 w-16 place-items-center rounded-xl ${service.tone}`}>
+                    <Icon size={28} />
+                  </span>
+                  <span className="mt-4 text-center text-sm font-bold text-brand-900">{service.title}</span>
+                </Link>
+              )
+            })}
           </div>
-        </div>
-      </section>
-
-      <section className="page-wrap -mt-2 pb-4">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => {
-            const Icon = serviceIcons[index]
-            return (
-              <Link key={service.title} to={service.to} className="card flex items-start gap-3 p-4 transition hover:-translate-y-0.5">
-                <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl ${service.tone}`}>
-                  <Icon size={20} />
-                </span>
-                <span>
-                  <span className="block font-extrabold">{service.title}</span>
-                  <span className="mt-1 block text-sm leading-5 text-muted">{service.text}</span>
-                </span>
-              </Link>
-            )
-          })}
         </div>
       </section>
 
@@ -165,7 +125,7 @@ export default function Home() {
       <section className="bg-brand-50 py-16">
         <div className="page-wrap grid gap-5 lg:grid-cols-2">
           <Reveal className="card overflow-hidden">
-            <img src="/images/tubes.jpg" alt="Scientist preparing laboratory samples" className="h-56 w-full object-cover" />
+            <img src="/images/samples.jpg" alt="Scientist preparing laboratory samples" className="h-56 w-full object-cover" />
             <div className="p-6 sm:p-8">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Diagnostics</p>
               <h2 className="mt-2 text-3xl font-extrabold">SSV Diagnostic Pathology Laboratory</h2>
@@ -185,7 +145,7 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={0.08} className="card overflow-hidden">
-            <img src="/images/home.jpg" alt="Care at home" className="h-56 w-full object-cover" />
+            <img src="/images/collection.jpg" alt="Technician collecting a blood sample" className="h-56 w-full object-cover" />
             <div className="p-6 sm:p-8">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Home collection</p>
               <h2 className="mt-2 text-3xl font-extrabold">Sample pickup at your door</h2>
@@ -220,23 +180,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#171028] py-16 text-white">
-        <div className="page-wrap">
-          <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-gold">Why SSV</p>
-            <h2 className="mt-2 text-3xl font-extrabold">A lab that stays easy to reach</h2>
-            <p className="mt-3 text-white/70">
-              Book a centre visit or a home collection. The team confirms the test, the charge, and when the report will be ready.
-            </p>
-          </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {highlights.map((item) => (
-              <article key={item.title} className="rounded-3xl border border-white/10 bg-white/5 p-5">
-                <h3 className="font-extrabold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-white/70">{item.text}</p>
-              </article>
-            ))}
-          </div>
+      <section className="border-y border-slate-200 bg-white py-12">
+        <div className="page-wrap grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["24 hrs", "Routine reports"],
+            ["Home", "Sample pickup"],
+            ["5", "Centre brands"],
+            ["ISO", "9001:2015 certified"],
+          ].map(([value, label]) => (
+            <div key={label}>
+              <p className="text-3xl font-extrabold text-brand-900">{value}</p>
+              <p className="mt-1 text-sm font-semibold text-muted">{label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="page-wrap py-16">
+        <h2 className="text-3xl font-extrabold tracking-tight text-brand-900">Why patients book SSV</h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {highlights.map((item) => (
+            <article key={item.title} className="card p-5">
+              <h3 className="font-extrabold text-brand-900">{item.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-muted">{item.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -252,16 +220,7 @@ export default function Home() {
         </div>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {centers.map((center) => (
-            <article key={center.name} className="card overflow-hidden sm:flex">
-              <img src={center.image} alt="" className="h-36 w-full bg-white object-contain sm:h-auto sm:w-56" />
-              <div className="p-5">
-                <h3 className="font-extrabold">{center.name}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{center.detail}</p>
-                <a href={center.map} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-extrabold text-brand-700">
-                  Directions
-                </a>
-              </div>
-            </article>
+            <CenterCard key={center.name} center={center} />
           ))}
         </div>
       </section>

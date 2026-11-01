@@ -27,10 +27,10 @@ export const nav = [
 ]
 
 export const services = [
-  { title: "Lab Tests", text: "Biochemistry, haematology, hormones, and infection screens.", to: "/diagnostics", tone: "bg-violet-100 text-violet-700" },
-  { title: "Home Collection", text: "Ask for a sample pickup at home. We confirm the area, time, and charge.", to: "/home-collection", tone: "bg-emerald-100 text-emerald-700" },
-  { title: "Health Profiles", text: "Fever, thyroid, diabetes, liver, kidney, and antenatal profiles.", to: "/diagnostics?category=Profiles", tone: "bg-amber-100 text-amber-700" },
-  { title: "24-hour reports", text: "Most routine reports are ready within a day. Special tests take longer.", to: "/diagnostics", tone: "bg-sky-100 text-sky-700" },
+  { title: "Lab Tests", text: "Biochemistry, haematology, hormones, and infection screens.", to: "/diagnostics", tone: "bg-blue-50 text-brand-800" },
+  { title: "Home Collection", text: "Ask for a sample pickup at home. We confirm the area, time, and charge.", to: "/home-collection", tone: "bg-green-50 text-gold" },
+  { title: "Health Profiles", text: "Fever, thyroid, diabetes, liver, kidney, and antenatal profiles.", to: "/diagnostics?category=Profiles", tone: "bg-brand-50 text-brand-800" },
+  { title: "24-hour reports", text: "Most routine reports are ready within a day. Special tests take longer.", to: "/diagnostics", tone: "bg-sky-50 text-sky-700" },
 ]
 
 export const conditions = ["Diabetes", "Thyroid", "Fever", "Heart", "Liver", "Kidney", "Pregnancy", "Anemia", "Fertility"]

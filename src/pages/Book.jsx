@@ -25,7 +25,7 @@ export default function Book() {
               </li>
             ))}
           </ul>
-          <img src="/images/home.jpg" alt="A reassuring hand hold" className="mt-8 h-56 w-full rounded-[2rem] object-cover" />
+          <img src="/images/blood.jpg" alt="Blood sample tubes for a booked test" className="mt-8 h-56 w-full rounded-[2rem] object-cover" />
         </div>
         <BookingForm />
       </div>

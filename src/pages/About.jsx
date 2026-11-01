@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
+import CenterCard from "../components/CenterCard"
 import { centers } from "../data/content"
 
 export default function About() {
@@ -37,7 +38,7 @@ export default function About() {
       </section>
 
       <section className="page-wrap grid items-center gap-8 pb-12 lg:grid-cols-2">
-        <img src="/images/lab.jpg" alt="Laboratory floor with diagnostic analysers" className="h-80 w-full rounded-[2rem] object-cover" />
+        <img src="/images/lab.jpg" alt="Automated diagnostic analysers in the laboratory" className="h-80 w-full rounded-[2rem] object-cover" />
         <div className="space-y-4">
           <article className="card p-6">
             <h2 className="text-2xl font-extrabold">SSV Diagnostic Pathology Laboratory</h2>
@@ -51,21 +52,12 @@ export default function About() {
         </div>
       </section>
 
-      <section className="bg-[#171028] py-14 text-white">
+      <section className="bg-brand-50 py-14">
         <div className="page-wrap">
-          <h2 className="text-3xl font-extrabold">The network</h2>
+          <h2 className="text-3xl font-extrabold text-brand-900">The network</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {centers.map((center) => (
-              <article key={center.name} className="overflow-hidden rounded-3xl bg-white text-ink">
-                <img src={center.image} alt="" className="h-36 w-full object-contain" />
-                <div className="p-4">
-                  <h3 className="font-extrabold">{center.name}</h3>
-                  <p className="mt-1 text-sm text-muted">{center.detail}</p>
-                  <a href={center.map} target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm font-extrabold text-brand-700">
-                    Directions
-                  </a>
-                </div>
-              </article>
+              <CenterCard key={center.name} center={center} />
             ))}
           </div>
         </div>

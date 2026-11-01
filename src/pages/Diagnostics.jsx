@@ -1,4 +1,5 @@
 import { Link, useSearchParams } from "react-router-dom"
+import CenterCard from "../components/CenterCard"
 import { useEffect, useMemo, useState } from "react"
 import { categories, centers, conditions, tests } from "../data/content"
 
@@ -46,13 +47,13 @@ export default function Diagnostics() {
               Biochemistry, haematology, hormones, infection screens, histopathology, and preventive profiles. This is a selection from the laboratory menu. If your test is missing, call and we will check it.
             </p>
           </div>
-          <img src="/images/tubes.jpg" alt="Laboratory sample preparation" className="h-72 w-full rounded-[2rem] object-cover" />
+          <img src="/images/lab-hero.jpg" alt="Microscope and sample tubes in the laboratory" className="h-72 w-full rounded-[2rem] object-cover object-center" />
         </div>
       </section>
 
       <section className="page-wrap pb-16">
         <form
-          className="card sticky top-[6.4rem] z-20 p-4"
+          className="card p-4"
           onSubmit={(event) => {
             event.preventDefault()
             update({ q: draft.trim() })
@@ -149,16 +150,7 @@ export default function Diagnostics() {
         <h2 className="mt-14 text-3xl font-extrabold">Our centres</h2>
         <div className="mt-5 grid gap-4 md:grid-cols-2">
           {centers.map((center) => (
-            <article key={center.name} className="card overflow-hidden">
-              <img src={center.image} alt="" className="h-40 w-full bg-white object-contain" />
-              <div className="p-5">
-                <h3 className="font-extrabold">{center.name}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{center.detail}</p>
-                <a href={center.map} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-extrabold text-brand-700">
-                  Directions
-                </a>
-              </div>
-            </article>
+            <CenterCard key={center.name} center={center} />
           ))}
         </div>
       </section>
