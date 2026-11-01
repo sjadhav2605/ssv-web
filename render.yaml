@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: ssv-web
+    runtime: node
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
