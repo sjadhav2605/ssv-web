@@ -2,7 +2,7 @@ export default function CenterCard({ center }) {
   return (
     <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
       <div className="flex aspect-[5/2] items-center justify-center bg-white">
-        <img src={center.image} alt="" className="h-full w-full object-contain" />
+        <img src={center.image} alt="" className="h-full w-full object-cover" />
       </div>
       <div className="flex h-28 flex-col bg-[#122a66] px-4 py-3 text-white">
         <h3 className="line-clamp-1 text-base font-extrabold leading-tight">{center.name}</h3>
