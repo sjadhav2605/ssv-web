@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import Crumb from "../components/Crumb"
 import { email, phones } from "../data/content"
 
 export default function Privacy() {
@@ -7,9 +8,10 @@ export default function Privacy() {
   }, [])
 
   return (
-    <article className="page-wrap max-w-3xl py-12">
-      <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Privacy</p>
-      <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-brand-950">What happens to an enquiry</h1>
+    <>
+      <Crumb current="Privacy" />
+      <article className="page-wrap max-w-3xl pb-12">
+      <h1 className="text-4xl font-semibold text-[#273990]">What happens to an enquiry</h1>
       <div className="mt-6 space-y-4 text-base leading-7 text-ink">
         <p>
           If you submit the form, this browser stores your name, phone number, the test or profile, an optional area, a preferred date, and your message. The record stays on this device under the name ssv-enquiries. This website does not send that record to a server of its own.
@@ -24,5 +26,6 @@ export default function Privacy() {
         </p>
       </div>
     </article>
+    </>
   )
 }

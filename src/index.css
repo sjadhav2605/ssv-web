@@ -23,7 +23,7 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: var(--color-ink);
-  background: #f3f0e8;
+  background: #ffffff;
 }
 
 ::selection {

@@ -100,6 +100,17 @@ export const highlights = [
   { title: "ISO 9001:2015", text: "A certified diagnostic service, with a network of partner centres." },
 ]
 
+export const instruments = [
+  "Erba",
+  "Sysmex",
+  "BeneSphera",
+  "Schiller",
+  "Allengers",
+  "Avantor",
+  "Abbott",
+  "Rapid Diagnostic",
+]
+
 export const centers = [
   {
     name: "SSV Pathology & Diagnostic Center",
@@ -124,12 +135,6 @@ export const centers = [
     image: "/centers/mayraa.jpg",
     detail: "Part of the SSV diagnostic network. Call for this centre’s timings.",
     map: "https://www.google.com/maps/search/?api=1&query=Mayraa+Diagnostic+Center+Pune",
-  },
-  {
-    name: "Samarth Diagnostic Center",
-    image: "/centers/samarth.jpg",
-    detail: "Part of the SSV diagnostic network.",
-    map: "https://maps.app.goo.gl/TRMh1UCxjFBD6Dks8",
   },
   {
     name: "Yogi Diagnostic Center",
@@ -197,7 +202,7 @@ export const faqs = [
   },
   {
     q: "Where is the main centre?",
-    a: "Sneha Sadan, Sambhajinagar, near Tharmax Chowk, Chinchwad, Pune 411019. The group also works with Rainbow, Isha, Mayraa, and Samarth diagnostic centres.",
+    a: "Sneha Sadan, Sambhajinagar, near Tharmax Chowk, Chinchwad, Pune 411019. The other centres are listed on the About page.",
   },
 ]
 

@@ -1,7 +1,9 @@
 import { Link, useSearchParams } from "react-router-dom"
-import CenterCard from "../components/CenterCard"
+import AddButton from "../components/AddButton"
+import Crumb from "../components/Crumb"
+import SearchField from "../components/SearchField"
 import { useEffect, useMemo, useState } from "react"
-import { categories, centers, conditions, faqs, phones, tests, whatsapp } from "../data/content"
+import { categories, conditions, faqs, phones, tests } from "../data/content"
 
 export default function Diagnostics() {
   const [params, setParams] = useSearchParams()
@@ -34,109 +36,102 @@ export default function Diagnostics() {
     setParams(fresh)
   }
 
+  function showMenu(next) {
+    update(next)
+    document.getElementById("test-menu")?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  const profiles = tests.filter((test) => test.category === "Profiles").slice(0, 4)
+  const popular = tests.filter((test) =>
+    ["HM012", "P059", "BC145", "P044", "P042", "BC003"].includes(test.code),
+  )
+
   return (
-    <>
-      <section>
-        <div className="page-wrap grid items-center gap-8 py-12 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">SSV Diagnostic Pathology Laboratory</p>
-            <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-brand-950 sm:text-5xl">
-              Book a test. Get a clear report.
-            </h1>
-            <p className="mt-4 max-w-xl text-lg leading-8 text-muted">
-              Biochemistry, haematology, hormones, infection screens, histopathology, and preventive profiles. This is a selection from the laboratory menu. If your test is missing, call and we will check it.
-            </p>
+    <div className="bg-white">
+      <Crumb current="Lab Tests" />
+      <section className="page-wrap pb-6">
+        <SearchField
+          value={draft}
+          onChange={(value) => {
+            setDraft(value)
+            update({ q: value.trim() })
+          }}
+          onSubmit={(value) => update({ q: value })}
+        />
+
+        <Link to="/diagnostics?category=Profiles" className="relative mt-4 block overflow-hidden rounded-xl">
+          <img src="/images/profiles-banner.jpg" alt="A scientist at the laboratory bench" className="aspect-video w-full object-cover object-center" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent" />
+          <div className="absolute inset-y-0 left-0 flex max-w-md flex-col justify-center px-6 pb-10 sm:px-10">
+            <p className="text-3xl font-semibold uppercase leading-tight text-[#273990]">Health profiles at the lab</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">Fever, thyroid, diabetes, liver, and kidney checks. The charge is confirmed when you call.</p>
           </div>
-          <img src="/images/lab-hero.jpg" alt="Microscope and sample tubes in the laboratory" className="h-72 w-full object-cover object-center" />
+          <p className="absolute inset-x-0 bottom-0 bg-[#6eb744] py-3 text-center text-sm font-semibold text-white">
+            Ask about a health profile
+          </p>
+        </Link>
+      </section>
+
+      <section className="page-wrap pb-8">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="text-2xl font-semibold text-[#273990]">Popular health profiles</h2>
+          <button type="button" onClick={() => showMenu({ category: "Profiles", q: "" })} className="text-sm font-semibold text-[#273990]">
+            View all
+          </button>
+        </div>
+        <div className="mt-4 flex gap-4 overflow-x-auto pb-2">
+          {profiles.map((test) => (
+            <article key={test.code} className="flex w-64 shrink-0 flex-col rounded-2xl border border-slate-200 bg-white p-4">
+              <Link to={`/diagnostics/${test.code}`} className="font-semibold text-[#273990]">{test.name}</Link>
+              <p className="mt-2 text-sm text-slate-500">Sample: {test.sample}</p>
+              <p className="mt-1 text-sm text-slate-500">Code {test.code}</p>
+              <p className="mt-3 text-sm font-semibold text-[#6eb744]">Charge confirmed on call</p>
+              <div className="mt-4 flex items-center gap-3">
+                <AddButton code={test.code} />
+                <Link to={`/diagnostics/${test.code}`} className="text-sm font-semibold text-[#273990]">More info</Link>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="page-wrap pb-10">
-        <h2 className="text-3xl font-extrabold">Blood tests at the laboratory</h2>
-        <p className="mt-3 max-w-3xl text-lg leading-8 text-muted">
-          Samples are analysed for routine checks, hormones, infection screens, and health profiles. Most routine reports are shared within 24 hours. Special tests take longer, and the charge is confirmed before you book.
-        </p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            ["Centres", "Chinchwad, plus Rainbow, Isha, Mayraa, and Samarth in the SSV network."],
-            ["Routine reports", "Most routine blood reports are shared within 24 hours."],
-            ["Simple booking", "Call or WhatsApp the test name. We confirm the slot and the charge."],
-            ["Home collection", "Ask for a pickup. We confirm the area and the time before anyone visits."],
-          ].map(([title, text]) => (
-            <article key={title} className="card p-5">
-              <h3 className="text-lg font-extrabold">{title}</h3>
-              <p className="mt-2 text-sm leading-6 text-muted">{text}</p>
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="text-2xl font-semibold text-[#273990]">Popular health tests</h2>
+          <button type="button" onClick={() => showMenu({ category: "", q: "" })} className="text-sm font-semibold text-[#273990]">
+            View all
+          </button>
+        </div>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          {popular.map((test) => (
+            <article key={test.code} className="rounded-2xl border border-slate-200 bg-white p-5">
+              <Link to={`/diagnostics/${test.code}`} className="text-lg font-semibold text-[#273990]">{test.name}</Link>
+              <p className="mt-2 text-sm leading-6 text-slate-600">Sample: {test.sample}. Code {test.code}.</p>
+              <p className="mt-3 text-sm font-semibold text-[#6eb744]">Charge confirmed on call</p>
+              <div className="mt-4 flex items-center gap-3">
+                <AddButton code={test.code} />
+                <Link to={`/diagnostics/${test.code}`} className="text-sm font-semibold text-[#273990]">More info</Link>
+              </div>
             </article>
-          ))}
-        </div>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {tests
-            .filter((test) => ["P041", "BC003", "BC269"].includes(test.code))
-            .map((test) => (
-              <article key={test.code} className="card flex flex-col p-5">
-                <p className="text-xs font-bold uppercase tracking-wider text-brand-600">{test.code}</p>
-                <h3 className="mt-2 text-xl font-extrabold">{test.name}</h3>
-                <p className="mt-2 text-sm text-muted">Sample: {test.sample}</p>
-                <Link
-                  to={`/book?item=${encodeURIComponent(`${test.name} (${test.code})`)}&interest=Lab%20test`}
-                  className="btn btn-brand mt-5"
-                >
-                  Book this test
-                </Link>
-              </article>
-            ))}
-        </div>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <a href={phones[0].href} className="btn btn-gold">
-            Call {phones[0].label}
-          </a>
-          <a href={`https://wa.me/${whatsapp}`} className="btn btn-ghost" target="_blank" rel="noreferrer">
-            WhatsApp
-          </a>
-        </div>
-        <div className="mt-8 divide-y divide-slate-300 border border-slate-300 bg-[#fbfaf6]">
-          {faqs.map((faq) => (
-            <details key={faq.q} className="group px-5 py-4">
-              <summary className="cursor-pointer list-none font-extrabold marker:content-none">
-                <span className="flex items-center justify-between gap-4">
-                  {faq.q}
-                  <span className="text-brand-600 group-open:rotate-45">+</span>
-                </span>
-              </summary>
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">{faq.a}</p>
-            </details>
           ))}
         </div>
       </section>
 
-      <section className="page-wrap pb-16">
+      <section id="test-menu" className="page-wrap scroll-mt-24 pb-16">
         <form
-          className="card p-4"
           onSubmit={(event) => {
             event.preventDefault()
             update({ q: draft.trim() })
           }}
         >
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <input
-              className="field"
-              value={draft}
-              onChange={(event) => setDraft(event.target.value)}
-              placeholder="Search by test name, code, or condition"
-              aria-label="Search tests"
-            />
-            <button className="btn btn-brand" type="submit">
-              Search
-            </button>
-          </div>
-          <div className="mt-3 flex gap-2 overflow-x-auto">
+          <div className="flex gap-2 overflow-x-auto">
             {categories.map((item) => (
               <button
                 key={item}
                 type="button"
                 onClick={() => update({ category: item === "All" ? "" : item })}
-                className={`shrink-0 px-3 py-1.5 text-sm font-bold ${
-                  category === item ? "bg-brand-800 text-white" : "bg-brand-50 text-brand-800"
+                className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold ${
+                  category === item ? "bg-[#273990] text-white" : "bg-[#f3f4f6] text-[#273990]"
                 }`}
               >
                 {item}
@@ -144,7 +139,7 @@ export default function Diagnostics() {
             ))}
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
-            <button type="button" onClick={() => update({ condition: "" })} className={`px-3 py-1 text-xs font-bold ${condition ? "bg-[#e7e2d6]" : "bg-gold text-white"}`}>
+            <button type="button" onClick={() => update({ condition: "" })} className={`rounded-full px-3 py-1 text-xs font-semibold ${condition ? "bg-[#f3f4f6] text-[#273990]" : "bg-[#6eb744] text-white"}`}>
               All conditions
             </button>
             {conditions.map((item) => (
@@ -152,7 +147,7 @@ export default function Diagnostics() {
                 key={item}
                 type="button"
                 onClick={() => update({ condition: item })}
-                className={`px-3 py-1 text-xs font-bold ${condition === item ? "bg-gold text-white" : "bg-[#e7e2d6] text-ink"}`}
+                className={`rounded-full px-3 py-1 text-xs font-semibold ${condition === item ? "bg-[#6eb744] text-white" : "bg-[#f3f4f6] text-[#273990]"}`}
               >
                 {item}
               </button>
@@ -163,21 +158,21 @@ export default function Diagnostics() {
         <p className="mt-5 text-sm font-semibold text-muted">{visible.length} tests shown · charges confirmed on call</p>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           {visible.map((test) => (
-            <article key={test.code} className="card flex flex-col p-5 sm:flex-row sm:items-center sm:justify-between">
+            <article key={test.code} className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-brand-600">
+                <p className="text-xs font-semibold uppercase tracking-wider text-[#6eb744]">
                   {test.category} · {test.code}
                 </p>
-                <h2 className="mt-1 text-lg font-extrabold">{test.name}</h2>
-                <p className="mt-1 text-sm text-muted">Sample: {test.sample}</p>
-                {test.includes && <p className="mt-2 text-sm leading-6 text-muted">Includes {test.includes}.</p>}
+                <h2 className="mt-1 text-lg font-semibold text-[#273990]">
+                  <Link to={`/diagnostics/${test.code}`}>{test.name}</Link>
+                </h2>
+                <p className="mt-1 text-sm text-slate-500">Sample: {test.sample}</p>
+                {test.includes && <p className="mt-2 text-sm leading-6 text-slate-600">Includes {test.includes}.</p>}
               </div>
-              <Link
-                to={`/book?item=${encodeURIComponent(`${test.name} (${test.code})`)}&interest=${encodeURIComponent(test.category === "Profiles" ? "Health profile" : "Lab test")}`}
-                className="btn btn-gold mt-4 shrink-0 sm:mt-0"
-              >
-                Book
-              </Link>
+              <div className="mt-4 flex shrink-0 items-center gap-3 sm:mt-0">
+                <AddButton code={test.code} />
+                <Link to={`/diagnostics/${test.code}`} className="text-sm font-semibold text-[#273990]">More info</Link>
+              </div>
             </article>
           ))}
         </div>
@@ -191,27 +186,39 @@ export default function Diagnostics() {
           </div>
         )}
 
-        <div className="mt-12 grid gap-4 bg-brand-900 p-6 text-white md:grid-cols-[1.2fr_0.8fr] md:p-8">
-          <div>
-            <h2 className="text-3xl font-extrabold">Home sample collection</h2>
-            <p className="mt-3 max-w-xl leading-7 text-white/75">
-              Share your area and the test name. The team confirms whether a phlebotomist can visit, the time window, any fasting advice, and the charge.
-            </p>
-          </div>
-          <div className="flex items-end">
-            <Link to="/home-collection" className="btn btn-gold">
+        <div className="mt-12 overflow-hidden rounded-2xl">
+          <img src="/images/collection.jpg" alt="A sample being collected" className="h-48 w-full object-cover" />
+          <div className="flex flex-col items-start justify-between gap-4 bg-[#273990] p-6 text-white md:flex-row md:items-center">
+            <div>
+              <h2 className="text-2xl font-semibold">Home sample collection</h2>
+              <p className="mt-2 max-w-xl text-sm leading-6 text-white/80">
+                Share your area and the test name. The team confirms the visit, any fasting advice, and the charge.
+              </p>
+            </div>
+            <Link to="/home-collection" className="rounded-full bg-[#6eb744] px-5 py-3 text-sm font-semibold text-white">
               Home collection details
             </Link>
           </div>
         </div>
 
-        <h2 className="mt-14 text-3xl font-extrabold">Our centres</h2>
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          {centers.map((center) => (
-            <CenterCard key={center.name} center={center} />
+        <h2 className="mt-14 text-2xl font-semibold text-[#273990]">About these tests</h2>
+        <p className="mt-3 max-w-3xl leading-7 text-slate-600">
+          This is a selection from the laboratory menu. Most routine reports are shared within 24 hours. If a test is missing, call {phones[0].label} or send a WhatsApp message and the lab will check it.
+        </p>
+        <div className="mt-6 divide-y divide-slate-200 rounded-2xl border border-slate-200">
+          {faqs.map((faq) => (
+            <details key={faq.q} className="group px-5 py-4">
+              <summary className="cursor-pointer list-none font-semibold text-[#273990] marker:content-none">
+                <span className="flex items-center justify-between gap-4">
+                  {faq.q}
+                  <span className="text-[#6eb744] group-open:rotate-45">+</span>
+                </span>
+              </summary>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{faq.a}</p>
+            </details>
           ))}
         </div>
       </section>
-    </>
+    </div>
   )
 }

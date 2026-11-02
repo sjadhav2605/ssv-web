@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import Crumb from "../components/Crumb"
 import { email, phones } from "../data/content"
 
 export default function Terms() {
@@ -7,9 +8,10 @@ export default function Terms() {
   }, [])
 
   return (
-    <article className="page-wrap max-w-3xl py-12">
-      <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Terms</p>
-      <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-brand-950">How this site is used</h1>
+    <>
+      <Crumb current="Terms" />
+      <article className="page-wrap max-w-3xl pb-12">
+      <h1 className="text-4xl font-semibold text-[#273990]">How this site is used</h1>
       <div className="mt-6 space-y-4 text-base leading-7 text-ink">
         <p>
           This site is for enquiries about tests, health profiles, and home sample collection at SSV Diagnostic Pathology Laboratory and its partner centres.
@@ -26,5 +28,6 @@ export default function Terms() {
         </p>
       </div>
     </article>
+    </>
   )
 }
